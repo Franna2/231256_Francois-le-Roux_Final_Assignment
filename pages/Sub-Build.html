@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build A Sub</title>
+  <link rel="stylesheet" href="/css/Sub-Build.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+          <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="#">Build your own Sub</a></li>
+            <li><a href="/pages/Sub-Checkout.html">Checkout your Sub</a></li>
+          </ul>
+        </nav>
+        <img src="" alt="Header Image">
+      </header>
+
+  <h1>Build A Sub</h1>
+
+ 
+  <form id="sub-form">
+    <div class="sub">
+      <h2>Sub 1</h2>
+      <label for="sub1-name">Sub Name:</label>
+      <input type="text" id="sub1-name" name="sub1-name" required>
+
+      <label for="sub1-bread">Bread:</label>
+      <select id="sub1-bread" name="sub1-bread">
+        <option value="white">White Bread</option>
+        <option value="wheat">Wheat Bread</option>
+        <option value="rye">Rye Bread</option>
+        <option value="cia">Ciabatta</option>
+      </select>
+
+      <label for="sub1-toppings">Toppings:</label>
+      <select id="sub1-toppings" name="sub1-toppings" multiple>
+        <option value="lettuce">Lettuce</option>
+        <option value="tomato">Tomato</option>
+        <option value="onion">Onion</option>
+      </select>
+
+      <label for="sub1-sauce">Sauce:</label>
+      <select id="sub1-sauce" name="sub1-sauce">
+        <option value="mayo">Mayonnaise</option>
+        <option value="mustard">Mustard</option>
+        <option value="tomato">Tomato sauce</option>
+      </select>
+
+      <label for="sub1-cost">Sub Cost:</label>
+      <input type="number" id="sub1-cost" name="sub1-cost" step="0.01" value="0" readonly>
+
+      <button type="button" class="remove-sub">Remove Sub</button>
+    </div>
+
+
+    <button type="button" id="add-sub">Add Sub</button>
+    <button type="submit">Place Order</button>
+  </form>
+
+  <script src="/js/Sub-Build.js"></script>
+</body>
+</html>
