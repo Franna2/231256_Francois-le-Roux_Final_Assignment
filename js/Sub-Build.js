@@ -67,7 +67,7 @@ function updateSubCost(subId) {
     const sauceSelect = document.createElement('select');
     sauceSelect.setAttribute('id', `sub${subCount}-sauce`);
     sauceSelect.setAttribute('name', `sub${subCount}-sauce`);
-    const sauceOptions = ['mayo', 'mustard', 'ketchup']; 
+    const sauceOptions = ['mayo', 'mustard', 'tomato sauce']; 
     sauceOptions.forEach(option => {
       const sauceOption = document.createElement('option');
       sauceOption.setAttribute('value', option);
