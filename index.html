@@ -1,65 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subs&Sands</title>
-  <link rel="stylesheet" href="/css/index.css">
+  <title>Home Page</title>
   
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
- 
   <header>
+    <img src="header-image.jpg" alt="Featured Image">
     <nav>
       <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="/pages/Sub-Build.html">Build your own Sub</a></li>
-        <li><a href="/pages/Sub-Checkout.html">Checkout your Sub</a></li>
+        <li><a href="/pages/Sub-Build.html">Custom Sub</a></li>
+        <li><a href="/pages/Sub-Checkout.html">Checkout Sub</a></li>
       </ul>
     </nav>
-    <img src="" alt="Header Image">
   </header>
 
- 
-  <section id="about">
+  <section>
     <h2>About Us</h2>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quos tempore iste velit sed aspernatur provident culpa nesciunt quae reiciendis ratione voluptatibus, neque, porro tenetur nobis vel quibusdam accusamus magnam.
-    </p>
+    <p>This is the About Us section. Add your content here.</p>
   </section>
 
-  
-  <section id="subs">
+  <section>
     <h2>Subs of the Month</h2>
-    <div class="sub-1">
-      <h3>Egg & Cress Sandwich</h3>
-      <p>361 kcal</p>
-      <p></p>
-    </div>
+    <div class="container">
+      <div class="row">
+        <!-- 1st Sub of the Month -->
+        <div class="col-3">
+          <h3>Sub 1 Name</h3>
+          <img src="sub1-image.jpg" alt="Sub 1 Image">
+          <p>Sub 1 description or components</p>
+        </div>
 
-    <div class="sub-2">
-      <h3>Pesto Focaccia Sandwich</h3>
-      <p>258 kcal</p>
-      <p>Ingredients: Ingredient 4, Ingredient 5, Ingredient 6</p>
-    </div>
+        <!-- 2nd Sub of the Month -->
+        <div class="col-3">
+          <h3>Sub 2 Name</h3>
+          <img src="sub2-image.jpg" alt="Sub 2 Image">
+          <p>Sub 2 description or components</p>
+        </div>
 
-    <div class="sub-3">
-        <h3>Paneer & Cheddar Sandwich</h3>
-        <p>158 kcal</p>
+        <!-- 3rd Sub of the Month -->
+        <div class="col-3">
+          <h3>Sub 3 Name</h3>
+          <img src="sub3-image.jpg" alt="Sub 3 Image">
+          <p>Sub 3 description or components</p>
+        </div>
       </div>
-
-      <div class="sub-4">
-        <h3>Ultimate Chorizo Ciabatta</h3>
-        <p>867 kcal</p>
-      </div>
-
-
+    </div>
   </section>
 
-
-  <footer>
-    <p>&copy; 2023 Sandwich Website. All rights reserved.</p>
-    <p>Final Assignment Term 2</p>
-  </footer>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

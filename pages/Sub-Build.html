@@ -1,66 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Build A Sub</title>
-  <link rel="stylesheet" href="/css/Sub-Build.css">
+  <title>Build A Sub Page</title>
 </head>
 <body>
+  <h1>Build A Sub Page</h1>
 
-    <header>
-        <nav>
-          <ul>
-            <li><a href="/index.html">Home</a></li>
-            <li><a href="#">Build your own Sub</a></li>
-            <li><a href="/pages/Sub-Checkout.html">Checkout your Sub</a></li>
-          </ul>
-        </nav>
-        <img src="" alt="Header Image">
-      </header>
+  <form>
+    <h2>Create Your Own Sub</h2>
+    
+    <label for="subName">Sub Name:</label>
+    <input type="text" id="subName" name="subName" required><br><br>
+    
+    <label for="bread">Bread:</label>
+    <select id="bread" name="bread" required>
+      <option value="">Select Bread</option>
+      <option value="white">White Bread</option>
+      <option value="wheat">Wheat Bread</option>
+      <option value="multigrain">Multigrain Bread</option>
+      <option value="rye">Rye Bread</option>
+      <option value="sourdough">Sourdough Bread</option>
+      <option value="ciabatta">Ciabatta Bread</option>
+    </select><br><br>
+    
+    <label for="toppings">Toppings:</label><br>
+    <input type="checkbox" id="tomato" name="toppings" value="tomato">
+    <label for="tomato">Tomato</label><br>
+    <input type="checkbox" id="lettuce" name="toppings" value="lettuce">
+    <label for="lettuce">Lettuce</label><br>
+    <input type="checkbox" id="onion" name="toppings" value="onion">
+    <label for="onion">Onion</label><br>
+    <!-- Add more toppings as needed -->
 
-  <h1>Build A Sub</h1>
-
- 
-  <form id="sub-form">
-    <div class="sub">
-      <h2>Sub 1</h2>
-      <label for="sub1-name">Sub Name:</label>
-      <input type="text" id="sub1-name" name="sub1-name" required>
-
-      <label for="sub1-bread">Bread:</label>
-      <select id="sub1-bread" name="sub1-bread">
-        <option value="white">White Bread</option>
-        <option value="wheat">Wheat Bread</option>
-        <option value="rye">Rye Bread</option>
-        <option value="cia">Ciabatta</option>
-      </select>
-
-      <label for="sub1-toppings">Toppings:</label>
-      <select id="sub1-toppings" name="sub1-toppings" multiple>
-        <option value="lettuce">Lettuce</option>
-        <option value="tomato">Tomato</option>
-        <option value="onion">Onion</option>
-      </select>
-
-      <label for="sub1-sauce">Sauce:</label>
-      <select id="sub1-sauce" name="sub1-sauce">
-        <option value="mayo">Mayonnaise</option>
-        <option value="mustard">Mustard</option>
-        <option value="tomato">Tomato sauce</option>
-      </select>
-
-      <label for="sub1-cost">Sub Cost:</label>
-      <input type="number" id="sub1-cost" name="sub1-cost" step="0.01" value="0" readonly>
-
-      <button type="button" class="remove-sub">Remove Sub</button>
-    </div>
-
-
-    <button type="button" id="add-sub">Add Sub</button>
-    <button type="submit">Place Order</button>
+    <br>
+    
+    <label for="sauce">Sauce:</label>
+    <select id="sauce" name="sauce" required>
+      <option value="">Select Sauce</option>
+      <option value="mayo">Mayonnaise</option>
+      <option value="mustard">Mustard</option>
+      <option value="ketchup">Ketchup</option>
+      <option value="ranch">Ranch</option>
+      <option value="bbq">BBQ Sauce</option>
+      <option value="honey-mustard">Honey Mustard</option>
+    </select><br><br>
+    
+    <label for="cost">Sub Cost:</label>
+    <input type="number" id="cost" name="cost" value="0" readonly><br><br>
+    
+    <input type="submit" value="Add to Order">
   </form>
 
-  <script src="/js/Sub-Build.js"></script>
+  <hr>
+
+  <h2>Your Order</h2>
+  <ul id="orderList">
+    <!-- Dynamically populate the order list -->
+  </ul>
+
+  <script>
+    // JavaScript code to handle form submission and update the order list
+    
+    document.querySelector('form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+      
+      // Get values from the form
+      var subName = document.getElementById('subName').value;
+      var bread = document.getElementById('bread').value;
+      
+      var toppings = [];
+      var checkboxes = document.querySelectorAll('input[name="toppings"]:checked');
+      checkboxes.forEach(function(checkbox) {
+        toppings.push(checkbox.value);
+      });
+      
+      var sauce = document.getElementById('sauce').value;
+      var cost = parseInt(document.getElementById('cost').value);
+      
+      // Update the order list
+      var orderList = document.getElementById('orderList');
+      var listItem = document.createElement('li');
+      listItem.textContent = subName + ' - Bread: ' + bread + ', Toppings: ' + toppings.join(', ') + ', Sauce: ' + sauce + ', Cost: ' + cost;
+      orderList.appendChild(listItem);
+      
+      // Reset the form
+      document.getElementById('subName').value = '';
+      document.getElementById('bread').value = '';
+      checkboxes.forEach(function(checkbox) {
+        checkbox.checked = false;
+      });
+      document.getElementById('sauce').value = '';
+      document.getElementById('cost').value = '0';
+    });
+  </script>
 </body>
 </html>

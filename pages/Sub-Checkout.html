@@ -1,40 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Check Out Your Sub</title>
-  <link rel="stylesheet" href="/css/Sub-Checkout.css">
+  <title>Checkout Page</title>
+  <style>
+    /* Global styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+    /* Order details section */
+    #productName {
+      font-weight: bold;
+    }
+
+    #productPrice, #productQuantity, #discountedAmount {
+      color: #666;
+    }
+
+    /* Apply coupon section */
+    input[type="text"] {
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      input[type="text"],
+      button {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+  <script>
+    // Function to update order details in the HTML
+    function updateOrderDetails() {
+      var orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+      document.getElementById("productName").textContent = orderDetails.product;
+      document.getElementById("productPrice").textContent = orderDetails.price;
+      document.getElementById("productQuantity").textContent = orderDetails.quantity;
+      document.getElementById("discountedAmount").textContent =
+        orderDetails.discountedAmount || orderDetails.price;
+    }
+
+    // Function to store order details in local storage
+    function storeOrderDetails() {
+      var orderDetails = {
+        product: "Example Product",
+        price: 100,
+        quantity: 1
+      };
+      localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
+    }
+
+    // Function to calculate discounted amount
+    function applyCoupon() {
+      var couponCode = document.getElementById("couponCode").value;
+      var orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+      var discountPercentage = 10; // Example discount percentage
+
+      if (couponCode === "EXAMPLECODE") {
+        var discountedAmount = orderDetails.price * (1 - discountPercentage / 100);
+        orderDetails.discountedAmount = discountedAmount.toFixed(2);
+        localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
+        document.getElementById("discountedAmount").textContent =
+          orderDetails.discountedAmount;
+        alert("Coupon code applied successfully!");
+      } else {
+        alert("Invalid coupon code.");
+      }
+    }
+
+    // Function to initialize the checkout page
+    function initializeCheckoutPage() {
+      // Check if order details are stored in local storage
+      if (localStorage.getItem("orderDetails")) {
+        updateOrderDetails();
+      } else {
+        alert("No order details found.");
+      }
+    }
+
+    // Event listener for the apply coupon button
+    document.getElementById("applyCouponBtn").addEventListener("click", applyCoupon);
+
+    // Call the initialization function when the page loads
+    window.onload = function () {
+      storeOrderDetails();
+      initializeCheckoutPage();
+    };
+  </script>
 </head>
 <body>
-
-
-<header>
-    <nav>
-      <ul>
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/pages/Sub-Build.html">Build your own Sub</a></li>
-        <li><a href="#">Checkout your Sub</a></li>
-      </ul>
-    </nav>
-    <img src="" alt="Header Image">
-  </header>
-
-  <h1>Check Out Your Sub</h1>
-
-  <div id="order-details">
-    <h2>Order Details</h2>
-    <ul id="sub-list"></ul>
-    <p id="subtotal">Subtotal: R0.00</p>
-    <form id="coupon-form">
-      <label for="coupon-code">Coupon Code:</label>
-      <input type="text" id="coupon-code" name="coupon-code">
-      <button type="submit">Apply Coupon</button>
-    </form>
-    <p id="discount">Discount: R0.00</p>
-    <p id="total">Total: R0.00</p>
+  <h1>Checkout Page</h1>
+  <div>
+    <h2>Order Details:</h2>
+    <p>Product: <span id="productName">Example Product</span></p>
+    <p>Price: $<span id="productPrice">100</span></p>
+    <p>Quantity: <span id="productQuantity">1</span></p>
+    <p>Discounted Amount: $<span id="discountedAmount">100</span></p>
   </div>
-
-  <script src="script.js"></script>
+  <div>
+    <h2>Apply Coupon:</h2>
+    <input type="text" id="couponCode" placeholder="Enter coupon code" />
+    <button id="applyCouponBtn">Apply</button>
+  </div>
 </body>
 </html>
