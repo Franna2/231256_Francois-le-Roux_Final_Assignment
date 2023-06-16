@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <title>Build A Sub Page</title>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Build A Sub</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/pages/Sub-Checkout.html">Check Out</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/index.html">Home</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        <h1>Build A Sub Page</h1>
+        <form>
+          <div class="form-group">
+            <label for="subName">Sub Name:</label>
+            <input type="text" class="form-control" id="subName" placeholder="Enter sub name">
+          </div>
+          <div class="form-group">
+            <label for="breadSelect">Bread:</label>
+            <select class="form-control" id="breadSelect">
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+              <option>Option 4</option>
+              <option>Option 5</option>
+              <option>Option 6</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="toppingsSelect">Toppings:</label>
+            <select multiple class="form-control" id="toppingsSelect">
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+              <option>Option 4</option>
+              <option>Option 5</option>
+              <option>Option 6</option>
+              <!-- Add more topping options here -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sauceSelect">Sauce:</label>
+            <select class="form-control" id="sauceSelect">
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+              <option>Option 4</option>
+              <option>Option 5</option>
+              <option>Option 6</option>
+              <!-- Add more sauce options here -->
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Add to Order</button>
+        </form>
+      </div>
+      <div class="col-5">
+        <img src="sandwich-image.jpg" alt="Sandwich Image" class="img-fluid">
+      </div>
+    </div>
+  </div>
+
+  <!-- Include Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,145 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Checkout Page</title>
-  <style>
-    /* Global styles */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
+  <title>Sandwichs & Subs: Checkout Page</title>
 
-    h1, h2 {
-      color: #333;
-    }
-
-    /* Order details section */
-    #productName {
-      font-weight: bold;
-    }
-
-    #productPrice, #productQuantity, #discountedAmount {
-      color: #666;
-    }
-
-    /* Apply coupon section */
-    input[type="text"] {
-      padding: 5px;
-      font-size: 16px;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4CAF50;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    button:focus {
-      outline: none;
-    }
-
-    /* Responsive styles */
-    @media (max-width: 480px) {
-      body {
-        padding: 10px;
-      }
-
-      h1 {
-        font-size: 24px;
-      }
-
-      h2 {
-        font-size: 20px;
-      }
-
-      input[type="text"],
-      button {
-        display: block;
-        width: 100%;
-        margin-bottom: 10px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="/css/Sub-Checkout.css">
   <script>
-    // Function to update order details in the HTML
-    function updateOrderDetails() {
-      var orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
-      document.getElementById("productName").textContent = orderDetails.product;
-      document.getElementById("productPrice").textContent = orderDetails.price;
-      document.getElementById("productQuantity").textContent = orderDetails.quantity;
-      document.getElementById("discountedAmount").textContent =
-        orderDetails.discountedAmount || orderDetails.price;
-    }
+    
+    function saveOrder() {
+      var itemName = document.getElementById("item-name").value;
+      var itemPrice = document.getElementById("item-price").value;
 
-    // Function to store order details in local storage
-    function storeOrderDetails() {
-      var orderDetails = {
-        product: "Example Product",
-        price: 100,
-        quantity: 1
+      var order = {
+        itemName: itemName,
+        itemPrice: itemPrice
       };
-      localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
+
+      var orderJSON = JSON.stringify(order);
+
+      localStorage.setItem("order", orderJSON);
     }
 
-    // Function to calculate discounted amount
     function applyCoupon() {
-      var couponCode = document.getElementById("couponCode").value;
-      var orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
-      var discountPercentage = 10; // Example discount percentage
+      var couponCode = document.getElementById("coupon-code").value;
 
-      if (couponCode === "EXAMPLECODE") {
-        var discountedAmount = orderDetails.price * (1 - discountPercentage / 100);
-        orderDetails.discountedAmount = discountedAmount.toFixed(2);
-        localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
-        document.getElementById("discountedAmount").textContent =
-          orderDetails.discountedAmount;
-        alert("Coupon code applied successfully!");
+      if (couponCode === "SALE10") {
+        var orderJSON = localStorage.getItem("order");
+
+        var order = JSON.parse(orderJSON);
+
+        var itemPrice = parseFloat(order.itemPrice);
+        var discountPercentage = 10; 
+        var discountAmount = (itemPrice * discountPercentage) / 100;
+        var discountedPrice = itemPrice - discountAmount;
+
+        document.getElementById("item-price").value = discountedPrice.toFixed(2) + " ZAR";
       } else {
-        alert("Invalid coupon code.");
+        alert("Invalid coupon code");
       }
     }
-
-    // Function to initialize the checkout page
-    function initializeCheckoutPage() {
-      // Check if order details are stored in local storage
-      if (localStorage.getItem("orderDetails")) {
-        updateOrderDetails();
-      } else {
-        alert("No order details found.");
-      }
-    }
-
-    // Event listener for the apply coupon button
-    document.getElementById("applyCouponBtn").addEventListener("click", applyCoupon);
-
-    // Call the initialization function when the page loads
-    window.onload = function () {
-      storeOrderDetails();
-      initializeCheckoutPage();
-    };
   </script>
 </head>
 <body>
   <h1>Checkout Page</h1>
-  <div>
-    <h2>Order Details:</h2>
-    <p>Product: <span id="productName">Example Product</span></p>
-    <p>Price: $<span id="productPrice">100</span></p>
-    <p>Quantity: <span id="productQuantity">1</span></p>
-    <p>Discounted Amount: $<span id="discountedAmount">100</span></p>
-  </div>
-  <div>
-    <h2>Apply Coupon:</h2>
-    <input type="text" id="couponCode" placeholder="Enter coupon code" />
-    <button id="applyCouponBtn">Apply</button>
-  </div>
+  <form>
+    <label for="item-name">Item Name:</label>
+    <input type="text" id="item-name" required><br>
+
+    <label for="item-price">Item Price:</label>
+    <input type="text" id="item-price" required><br>
+
+    <label for="coupon-code">Coupon Code:</label>
+    <input type="text" id="coupon-code"><br>
+
+    <button type="button" onclick="saveOrder()">Save Order</button>
+    <button type="button" onclick="applyCoupon()">Apply Coupon</button>
+  </form>
 </body>
 </html>

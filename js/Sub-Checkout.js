@@ -1,41 +1,32 @@
-// Function to update order details in the HTML
-function updateOrderDetails() {
-  var orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
-  document.getElementById("productName").textContent = orderDetails.product;
-  document.getElementById("productPrice").textContent = orderDetails.price;
-  document.getElementById("productQuantity").textContent = orderDetails.quantity;
-  document.getElementById("discountedAmount").textContent = orderDetails.discountedAmount || orderDetails.price;
+// Function to save order details in local storage
+function saveOrder() {
+  var itemName = document.getElementById("item-name").value;
+  var itemPrice = document.getElementById("item-price").value;
+
+  var order = {
+    itemName: itemName,
+    itemPrice: itemPrice
+  };
+
+  var orderJSON = JSON.stringify(order);
+  localStorage.setItem("order", orderJSON);
 }
 
-// Function to handle coupon application and update the HTML
+// Function to apply the coupon code discount
 function applyCoupon() {
-  var couponCode = document.getElementById("couponCode").value;
-  var orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
-  var discountPercentage = 10; // Example discount percentage
+  var couponCode = document.getElementById("coupon-code").value;
 
-  if (couponCode === "EXAMPLECODE") {
-    var discountedAmount = orderDetails.price * (1 - discountPercentage / 100);
-    orderDetails.discountedAmount = discountedAmount.toFixed(2);
-    localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
-    document.getElementById("discountedAmount").textContent = orderDetails.discountedAmount;
-    alert("Coupon code applied successfully!");
+  if (couponCode === "SALE10") {
+    var orderJSON = localStorage.getItem("order");
+    var order = JSON.parse(orderJSON);
+
+    var itemPrice = parseFloat(order.itemPrice);
+    var discountPercentage = 10;
+    var discountAmount = (itemPrice * discountPercentage) / 100;
+    var discountedPrice = itemPrice - discountAmount;
+
+    document.getElementById("item-price").value = discountedPrice.toFixed(2) + " ZAR";
   } else {
-    alert("Invalid coupon code.");
+    alert("Invalid coupon code");
   }
 }
-
-// Function to initialize the checkout page
-function initializeCheckoutPage() {
-  // Check if order details are stored in local storage
-  if (localStorage.getItem("orderDetails")) {
-    updateOrderDetails();
-  } else {
-    alert("No order details found.");
-  }
-}
-
-// Event listener for the apply coupon button
-document.getElementById("applyCouponBtn").addEventListener("click", applyCoupon);
-
-// Call the initialization function when the page loads
-window.onload = initializeCheckoutPage;
