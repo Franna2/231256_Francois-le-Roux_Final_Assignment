@@ -30,3 +30,9 @@ function applyCoupon() {
     alert("Invalid coupon code");
   }
 }
+
+// Event listener for save button
+document.getElementById("save-button").addEventListener("click", saveOrder);
+
+// Event listener for apply coupon button
+document.getElementById("apply-coupon-button").addEventListener("click", applyCoupon);
